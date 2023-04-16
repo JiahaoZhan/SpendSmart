@@ -5,8 +5,8 @@ import moment from "moment"
 const Expense = ({id, description, amount, createdAt}) => (
     <li>
         <p>{description}</p>
-        <p>{amount}</p>
-        <p>{createdAt}</p>
+        <p>{`$${amount/100}`}</p>
+        <p>{moment(createdAt).format("lll")}</p>
         <Link to={`/edit/${id}`}>Edit</Link>
     </li>
 )

@@ -45,7 +45,7 @@ export const startSetExpenses = () => {
                         ...expensesData[key]
                     })
                 }
-                dispatch(setExpenses(expenseArray))
+                dispatch(setExpenses(expensesArray))
             } else {
                 console.log("No data available");
             }

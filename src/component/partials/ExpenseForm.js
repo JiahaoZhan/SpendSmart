@@ -29,7 +29,7 @@ const ExpenseForm = ({expense, onSubmit}) => {
             onSubmit({
                 description,
                 amount: parseFloat(amount, 10) * 100,
-                createdAt: createdAt.format(),
+                createdAt: createdAt,
                 note
             })
         }
