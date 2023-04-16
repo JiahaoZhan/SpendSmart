@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import DatePicker from 'react-date-picker'
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
@@ -9,13 +8,14 @@ const ExpenseForm = ({expense, onSubmit}) => {
     const [description, setDescription] = useState(expense? expense.description : '');
     const [note, setNote] = useState(expense? expense.note : '');
     const [amount, setAmount] = useState(expense? (expense.amount / 100).toString() : '');
-    const [createdAt, setCreateDate] = useState(expense? moment(expense.createdAt): moment());
+    const [createdAt, setCreateDate] = useState(expense? expense.createdAt: moment().format());
     const [focused, setFocused] = useState(false);
     const [errMsg, setErrMsg] = useState('');
 
     const onDatePickerChange = (createdDate) => {
+        console.log(createdDate)
         if (createdDate) {
-            setCreateDate(createdDate)
+            setCreateDate(createdDate.toString())
         }
     }
 

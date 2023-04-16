@@ -1,16 +1,27 @@
 import React from "react"
 import ExpenseForm from "./partials/ExpenseForm"
-import { startAddExpense } from "../actions/expense"
-import { connect } from "react-redux"
+import { addExpense } from "../actions/expense"
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { ref, push } from "firebase/database";
+import db from "../database/firebase"
 
-const AddExpense = ({startAddExpense}) => {
+const AddExpense = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const addingExpense = (expense) => {
-        startAddExpense(expense);
+    const addingExpense = (expenseData = {}) => {
+        const { description = '', note = '', amount = 0, createdAt = 0 } = expenseData;
+        const expense = { description, note, amount, createdAt };
+        push(ref(db, 'expenses'), expense)
+        .then((ref)=>{
+            dispatch(addExpense({
+                id: ref.key,
+                ...expense
+            }))})
         navigate('/');
     }
+
     return (
         <div>
             <h2>Add Expense</h2>
@@ -19,8 +30,4 @@ const AddExpense = ({startAddExpense}) => {
     )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    startAddExpense: (expense) => dispatch(startAddExpense(expense))
-})
-
-export default connect(null, mapDispatchToProps)(AddExpense)
+export default AddExpense

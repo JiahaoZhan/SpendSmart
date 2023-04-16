@@ -1,19 +1,22 @@
 import React, { useState } from "react"
 import { sortByAmount, setEndDate, setStartDate, setTextFilter, sortByDate } from "../actions/filter";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment"
 import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
 const ExpenseFilters = () => {
-    const [dates, setDates] = useState([new Date(), new Date()]);
+    const [dates, setDates] = useState([moment().startOf('month').format('lll'), moment().endOf('month').format('lll')]);
     const dispatch = useDispatch()
     const filters = useSelector((state) => (state.filters))
 
     const onDatesChange = (dates) => {
-      dispatch(setStartDate(dates[0]))
-      dispatch(setEndDate(dates[1]))
-      setDates(dates)
+      const startDate = dates[0].toString()
+      const endDate = dates[1].toString()
+      dispatch(setStartDate(startDate))
+      dispatch(setEndDate(endDate))
+      setDates([startDate, endDate])
     }
 
     const onSortByChange = (e) => {

@@ -12,7 +12,7 @@ export const sortByAmount = () => ({
 })
 
 export const setStartDate = (date) => ({
-    type: 'SORT_BY_DATE',
+    type: 'SET_START_DATE',
     date
 })
 
