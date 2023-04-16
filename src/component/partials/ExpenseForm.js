@@ -1,14 +1,23 @@
 import React from "react";
 import { useState } from "react";
-
+import DatePicker from 'react-date-picker'
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
+import moment from 'moment'
 
 const ExpenseForm = ({expense, onSubmit}) => {
     const [description, setDescription] = useState(expense? expense.description : '');
     const [note, setNote] = useState(expense? expense.note : '');
     const [amount, setAmount] = useState(expense? (expense.amount / 100).toString() : '');
-    const [createDate, setCreateDate] = useState(expense? expense.createDate: 0);
+    const [createdAt, setCreateDate] = useState(expense? moment(expense.createdAt): moment());
     const [focused, setFocused] = useState(false);
     const [errMsg, setErrMsg] = useState('');
+
+    const onDatePickerChange = (createdDate) => {
+        if (createdDate) {
+            setCreateDate(createdDate)
+        }
+    }
 
     const formHandler = (e) => {
         e.preventDefault();
@@ -20,7 +29,7 @@ const ExpenseForm = ({expense, onSubmit}) => {
             onSubmit({
                 description,
                 amount: parseFloat(amount, 10) * 100,
-                createDate,
+                createdAt: createdAt.format(),
                 note
             })
         }
@@ -51,14 +60,7 @@ const ExpenseForm = ({expense, onSubmit}) => {
             </input>
 
             {/*createDate*/}
-            <input 
-            type="number" 
-            name="createDate" 
-            value={createDate}
-            onChange={(e)=>[
-                setCreateDate(e.target.value)
-            ]}>
-            </input>
+            <DatePicker onChange={onDatePickerChange} value={createdAt}/>
 
             {/*note*/}
             <textarea 

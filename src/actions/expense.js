@@ -45,7 +45,7 @@ export const startSetExpenses = () => {
                         ...expensesData[key]
                     })
                 }
-                dispatch(setExpenses(expensesArray))
+                dispatch(setExpenses(expenseArray))
             } else {
                 console.log("No data available");
             }
@@ -61,6 +61,7 @@ export const startAddExpense = (expenseData = {}) => {
     return (dispatch) => {
         const { description = '', note = '', amount = 0, createdAt = 0 } = expenseData;
         const expense = { description, note, amount, createdAt };
+        console.log(expense)
         push(ref(db, 'expenses'), expense)
         .then((ref)=>{
             dispatch(addExpense({

@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from 'redux-logger'
 import expenseReducer from "../reducers/expense";
+import filterReducer from "../reducers/filter"
 
 const reducer = {
-  expenses: expenseReducer
+  expenses: expenseReducer,
+  filters: filterReducer
 }
 
 const store = configureStore({
