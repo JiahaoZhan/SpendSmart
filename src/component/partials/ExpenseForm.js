@@ -13,7 +13,6 @@ const ExpenseForm = ({expense, onSubmit}) => {
     const [errMsg, setErrMsg] = useState('');
 
     const onDatePickerChange = (createdDate) => {
-        console.log(createdDate)
         if (createdDate) {
             setCreateDate(createdDate.toString())
         }
