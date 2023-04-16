@@ -8,22 +8,25 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    rules: [{
+    rules: [
+      {
       loader: 'babel-loader',
       test: /\.js$/,
       exclude: /node_modules/,
-    }, {
-      test: /\.s?css$/,
+    },
+    {
+      test: /\.s?css$/i,
       use: [
         'style-loader',
         'css-loader',
-        'sass-loader'
+        'sass-loader',
+        'postcss-loader'
       ]
-    }]
+    },]
   },
   devtool: 'eval',
   devServer: {
     static: path.join(__dirname, 'public'),
-    historyApiFallback: true
+    historyApiFallback: true,
   }
 };

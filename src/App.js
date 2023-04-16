@@ -8,6 +8,7 @@ import { startSetExpenses } from "./actions/expense";
 import Layout from "./component/Layout";
 import store from "./store/configStore"
 import { Provider } from 'react-redux'
+import './tailwind/index.css';
 
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
