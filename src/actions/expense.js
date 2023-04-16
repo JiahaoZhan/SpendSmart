@@ -1,5 +1,6 @@
 import db from "../database/firebase"
-import { ref, push } from "firebase/database";
+import { ref, push, child, get } from "firebase/database";
+
 
 export const addExpense = (expense) => (
     {
@@ -31,18 +32,27 @@ export const setExpenses = (expenses) => (
 )
 
 
-export const startSetExpenses = (expenses = []) => {
+export const startSetExpenses = () => {
+    const dbRef = ref(db)
     return (dispatch, getState) => {
-        return database.ref(`expenses`).once('value').then((snapshot) => {
-          const expenses = [];
-          snapshot.forEach((childSnapshot) => {
-            expenses.push({
-              id: childSnapshot.key,
-              ...childSnapshot.val()
-            });
-          });
-          dispatch(setExpenses(expenses));
-        });
+        return get(child(dbRef, 'expenses')).then((snapshot) => {
+            if (snapshot.exists()) {
+                const expensesData = snapshot.val();
+                const expensesArray = []
+                for (let key in expensesData) {
+                    expensesArray.push({
+                        id: key,
+                        ...expensesData[key]
+                    })
+                }
+                dispatch(setExpenses(expensesArray))
+            } else {
+                console.log("No data available");
+            }
+          })
+          .catch(()=>{
+
+          })
     };
 };    
 

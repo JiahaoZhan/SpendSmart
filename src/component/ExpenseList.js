@@ -4,7 +4,6 @@ import Expense from "./Expense"
 
 const ExpenseList = () => {
     const expenses = useSelector((state) => state.expenses)
-    console.log(expenses)
     return <div>
         <h2>ExpenseList</h2>
         {

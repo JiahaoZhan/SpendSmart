@@ -14,7 +14,7 @@ const AddExpense = ({startAddExpense}) => {
     return (
         <div>
             <h2>Add Expense</h2>
-            <ExpenseForm addingExpense={addingExpense}/>
+            <ExpenseForm onSubmit={addingExpense}/>
         </div>
     )
 }

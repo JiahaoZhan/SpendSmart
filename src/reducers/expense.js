@@ -1,13 +1,4 @@
-import db from "../database/firebase";
-import {ref, onValue} from "firebase/database";
-
-const expensesRef = ref(db, 'expenses');
-onValue(expensesRef, (snapshot) => {
-    const data = Object.entries(snapshot.val());
-    
-});
-
-const expenseReducer = (state=expenses, action) => {
+const expenseReducer = (state=[], action) => {
     switch (action.type) {
         case 'ADD_EXPENSE':
             return [
@@ -30,6 +21,11 @@ const expenseReducer = (state=expenses, action) => {
                     return expense
                 }
             })
+        case 'SET_EXPENSE':
+            return [
+                ...state,
+                ...action.expenses
+            ]
         default: 
             return state;
     }

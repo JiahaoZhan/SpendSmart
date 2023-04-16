@@ -9,7 +9,6 @@ import Layout from "./component/Layout";
 import store from "./store/configStore"
 import { Provider } from 'react-redux'
 
-
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
 const router = createBrowserRouter(
@@ -21,13 +20,16 @@ const router = createBrowserRouter(
         </Route>
     )
 )
+
+let hasRendered = false
+
 const jsx = (
 <Provider store={store}>
     <RouterProvider router={router}/>
 </Provider>
 )
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('root'));
+root.render(<p>Loading...</p>);
 
 const renderApp = () => {
     if (!hasRendered) {

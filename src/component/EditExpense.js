@@ -1,14 +1,17 @@
 import React from "react"
-import { connect } from "react-redux"
 import ExpenseForm from "./partials/ExpenseForm"
 import { editExpense, removeExpense } from "../actions/expense"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
 
-const EditExpense = ({expense, dispatch}) => {
+const EditExpense = () => {
+    let {id} = useParams();
     const navigate = useNavigate()
+    const expense = useSelector((state) => state.expenses.find((expense)=> expense.id === id))
+    const dispatch = useDispatch()
 
     const editingExpense = (expense) => {
-        dispatch(editExpense(expense.id, expense))
+        dispatch(editExpense(id, expense))
         navigate('/')
     }
 
@@ -19,14 +22,10 @@ const EditExpense = ({expense, dispatch}) => {
 
     return (
     <div>
-        <ExpenseForm expense onSubmit={editingExpense}/>
+        <ExpenseForm expense={expense} onSubmit={editingExpense}/>
         <button onClick={removingExpense}>Remove</button>
     </div>
     )
 }
 
-const mapStateToProps = (state, props) => (
-    {expense: state.expenses.find((expense)=>expense.id === props.match.params.id)}
-)
-
-export default connect(mapStateToProps)(EditExpense);
+export default EditExpense

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 
-const ExpenseForm = ({expense, addingExpense}) => {
+const ExpenseForm = ({expense, onSubmit}) => {
     const [description, setDescription] = useState(expense? expense.description : '');
     const [note, setNote] = useState(expense? expense.note : '');
     const [amount, setAmount] = useState(expense? (expense.amount / 100).toString() : '');
@@ -10,14 +10,14 @@ const ExpenseForm = ({expense, addingExpense}) => {
     const [focused, setFocused] = useState(false);
     const [errMsg, setErrMsg] = useState('');
 
-    const onSubmit = (e) => {
+    const formHandler = (e) => {
         e.preventDefault();
         if (!description || !amount) {
             setErrMsg("Please provide description or amount")
         }
         else {
             setErrMsg("")
-            addingExpense({
+            onSubmit({
                 description,
                 amount: parseFloat(amount, 10) * 100,
                 createDate,
@@ -27,7 +27,7 @@ const ExpenseForm = ({expense, addingExpense}) => {
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={formHandler}>
             {/*description*/}
             <input 
             type="text" 
