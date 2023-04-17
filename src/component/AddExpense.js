@@ -24,7 +24,6 @@ const AddExpense = () => {
 
     return (
         <div>
-            <h2>Add Expense</h2>
             <ExpenseForm onSubmit={addingExpense}/>
         </div>
     )

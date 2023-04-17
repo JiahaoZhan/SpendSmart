@@ -4,7 +4,7 @@ import Header from "./partials/Header";
 import Footer from "./partials/Footer";
 
 const Layout = () => (
-    <div>
+    <div className="bg-slate-800 min-h-screen">
         <Header/>
         <Outlet/>
         <Footer/>

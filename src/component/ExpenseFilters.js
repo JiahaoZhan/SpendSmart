@@ -12,11 +12,18 @@ const ExpenseFilters = () => {
     const filters = useSelector((state) => (state.filters))
 
     const onDatesChange = (dates) => {
-      const startDate = dates[0].toString()
-      const endDate = dates[1].toString()
-      dispatch(setStartDate(startDate))
-      dispatch(setEndDate(endDate))
-      setDates([startDate, endDate])
+      if (dates) {
+        const startDate = dates[0].toString()
+        const endDate = dates[1].toString()
+        dispatch(setStartDate(startDate))
+        dispatch(setEndDate(endDate))
+        setDates([startDate, endDate])
+      }
+      else {
+        dispatch(setStartDate(null))
+        dispatch(setEndDate(null))
+        setDates([null, null])
+      }
     }
 
     const onSortByChange = (e) => {
@@ -28,15 +35,13 @@ const ExpenseFilters = () => {
     }
     
     return (
-      <div>
-        <div>
-          <input type="text" placeholder="Search" value={filters.text} onChange={onSearchChange}></input>
-          <select value={filters.sortBy} onChange={onSortByChange}>
+      <div className="flex justify-center mb-6">
+        <input className="inline-block shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Enter keywords" value={filters.text} onChange={onSearchChange}></input>
+        <select className="inline-block shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={filters.sortBy} onChange={onSortByChange}>
             <option value="date">Date</option>
             <option value="amount">Amount</option>
-          </select>
-        </div>
-        <DateRangePicker 
+        </select>
+        <DateRangePicker
         onChange={onDatesChange}
         value={dates} 
         openCalendarOnFocus={true}
