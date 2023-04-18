@@ -42,6 +42,7 @@ const ExpenseFilters = () => {
             <option value="amount">Amount</option>
         </select>
         <DateRangePicker
+        className="inline-block shadow appearance-none border rounded  py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
         onChange={onDatesChange}
         value={dates} 
         openCalendarOnFocus={true}
