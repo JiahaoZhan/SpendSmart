@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@wojtekmaj/react-daterange-picker": "^5.0.2",
+    "express": "^4.18.2",
     "firebase": "^9.19.1",
     "moment": "^2.29.4",
     "react": "^18.2.0",
@@ -21,10 +22,9 @@
     "sass": "^1.62.0"
   },
   "scripts": {
-    "dev": "webpack serve",
-    "build": "webpack --mode production",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "serve": "webpack serve --mode=development ",
+    "build:prod": "webpack --mode=production",
+    "start": "node server/server.js"
   },
   "eslintConfig": {
     "extends": [
