@@ -35,14 +35,14 @@ const ExpenseFilters = () => {
     }
     
     return (
-      <div className="flex justify-center mb-6">
-        <input className="inline-block shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Enter keywords" value={filters.text} onChange={onSearchChange}></input>
-        <select className="inline-block shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={filters.sortBy} onChange={onSortByChange}>
+      <div className="flex flex-wrap justify-center mb-6">
+        <input className="flex-initial inline-block shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Enter keywords" value={filters.text} onChange={onSearchChange}></input>
+        <select className="flex-initial inline-block shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={filters.sortBy} onChange={onSortByChange}>
             <option value="date">Date</option>
             <option value="amount">Amount</option>
         </select>
         <DateRangePicker
-        className="inline-block shadow appearance-none border rounded  py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+        className="flex-initial inline-block shadow appearance-none border rounded  py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
         onChange={onDatesChange}
         value={dates} 
         openCalendarOnFocus={true}
